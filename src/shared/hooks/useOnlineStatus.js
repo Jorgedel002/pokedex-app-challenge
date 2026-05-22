@@ -22,11 +22,8 @@ function getServerSnapshot() {
 export function useOnlineStatus() {
   const dispatch = useDispatch()
 
-  // ✅ useSyncExternalStore for browser API (React-recommended pattern)
   const isOnline = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
-  // Sync to Redux store — useEffect is valid here because
-  // dispatching to an external store (Redux) IS a side-effect
   const prevOnline = useRef(isOnline)
   useEffect(() => {
     if (prevOnline.current !== isOnline) {

@@ -295,9 +295,9 @@ export default function PokemonDetailPage() {
         </InfoCard>
         <InfoCard>
           <InfoCardTitle>Datos Físicos</InfoCardTitle>
-          <InfoItem>📏 Altura: {(pokemon.height / 10).toFixed(1)} m</InfoItem>
-          <InfoItem>⚖️ Peso: {(pokemon.weight / 10).toFixed(1)} kg</InfoItem>
-          {generation && <InfoItem>🧬 Generación: {generation}</InfoItem>}
+          <InfoItem>Altura: {(pokemon.height / 10).toFixed(1)} m</InfoItem>
+          <InfoItem>Peso: {(pokemon.weight / 10).toFixed(1)} kg</InfoItem>
+          {generation && <InfoItem>Generación: {generation}</InfoItem>}
         </InfoCard>
       </InfoGrid>
     </>
