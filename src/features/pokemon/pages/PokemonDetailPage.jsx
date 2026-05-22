@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useGetDetailQuery, useGetSpeciesQuery } from '../../../api/pokemonApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFavorite, removeFavorite, selectIsInTeam, selectTeamFull } from '../../favorites/favoritesSlice'
@@ -13,6 +13,30 @@ const statColorMap = {
   hp: '#FF5959', attack: '#F5AC78', defense: '#FAE078',
   'special-attack': '#9DB7F5', 'special-defense': '#A7DB8D', speed: '#FA92B2',
 }
+
+const BackButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: 600;
+  cursor: pointer;
+  padding: ${({ theme }) => theme.spacing.sm} 0;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  transition: color 0.2s;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`
 
 const Hero = styled.div`
   background: linear-gradient(180deg, ${({ $typeColor }) => $typeColor || '#A8A878'}44 0%, ${({ theme }) => theme.colors.background} 100%);
@@ -236,9 +260,17 @@ export default function PokemonDetailPage() {
 
   const generation = species?.generation?.name?.replace('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 
+  const navigate = useNavigate()
+
   return (
     <>
       <CacheBanner status={cacheStatus} />
+      <BackButton onClick={() => navigate('/')} aria-label="Volver">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Volver
+      </BackButton>
       <Hero $typeColor={typeColor}>
         <HeroSprite src={pokemon.sprites?.front_default} alt={pokemon.name} />
         <HeroName>{capitalizeName(pokemon.name)}</HeroName>

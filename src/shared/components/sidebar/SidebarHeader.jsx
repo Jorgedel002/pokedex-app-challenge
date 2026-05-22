@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom'
 import PokeballIcon from './PokeballIcon'
 import {
   SidebarHeaderWrapper,
@@ -9,13 +10,15 @@ import {
   StatusDot,
 } from './sidebarStyles'
 
-export default function SidebarHeader({ expanded, onToggle, dotStatus, statusLabel }) {
+export default function SidebarHeader({ expanded, onToggle, dotStatus, statusLabel, isMobile }) {
+  const effectiveExpanded = isMobile ? true : expanded
+
   return (
     <SidebarHeaderWrapper>
-      <HeaderContent $expanded={expanded}>
-        {expanded ? (
+      <HeaderContent $expanded={effectiveExpanded}>
+        {effectiveExpanded ? (
           <>
-            <PokeballButton onClick={onToggle} aria-label="Colapsar sidebar">
+            <PokeballButton onClick={isMobile ? undefined : onToggle} aria-label={isMobile ? undefined : "Colapsar sidebar"}>
               <Logo>Pokédex</Logo>
               <PokeballIcon />
             </PokeballButton>

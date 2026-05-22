@@ -58,8 +58,9 @@ export default function Sidebar() {
           onToggle={() => setExpanded((prev) => !prev)}
           dotStatus={dotStatus}
           statusLabel={statusLabel}
+          isMobile={mobileOpen}
         />
-        <SidebarNav expanded={expanded} activePath={location.pathname} />
+        <SidebarNav expanded={mobileOpen ? true : expanded} activePath={location.pathname} />
       </SidebarContainer>
     </>
   )
